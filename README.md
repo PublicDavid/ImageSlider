@@ -1,19 +1,5 @@
-# title(){return this.options.title||this.options.name}
-
-Quick start:
-
-```
-$ yarn # npm install
-$ yarn build # npm run build
-````
-
-## Development
-
-Run Webpack in watch-mode to continually compile the JavaScript as you work:
-
-```
-$ yarn watch # npm run watch
-```
+# Simple JavaScript Image Slider
+This is my version of a beginner challenge in the Scrimba Frontend Career Path
 
 ## Supporting Scrimba
 
