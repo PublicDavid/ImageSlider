@@ -3,12 +3,13 @@ let slidePosition = 0;
 const totalSlides = slides.length;
 const bulletsEl = document.querySelector('.carousel-bullets');
 let bullets = [];
+let timerId = 0
 
 
 document.getElementById('carousel-button-next').addEventListener('click', moveToNextSlide);
 document.getElementById('carousel-button-prev').addEventListener('click', moveToPrevSlide);
 
-setInterval(moveToNextSlide, 5000);
+timerId = setInterval(moveToNextSlide, 5000);
 
 document.addEventListener('keyup', function (e) {
     if (e.key === 'ArrowRight') {
@@ -35,8 +36,7 @@ document.addEventListener('click', function (e) {
     }
     bulletsEl.innerHTML = bullet;
     bullets = document.querySelectorAll('[data-bullet]');
-    bullets[0].classList.remove('carousel-bullet');
-    bullets[0].classList.add('carousel-bullet-active');
+    addActiveButton();
 })();
 
 function hideAllSlides() {
@@ -47,6 +47,7 @@ function hideAllSlides() {
 }
 
 function moveToNextSlide() {
+    clearInterval(timerId);
     hideAllSlides();
     removeActiveButton();
     
@@ -58,9 +59,12 @@ function moveToNextSlide() {
     
     slides[slidePosition].classList.add("carousel-item-visible");
     addActiveButton();
+    timerId = setInterval(moveToNextSlide, 5000);
 }
 
 function moveToPrevSlide() {
+    clearInterval(timerId);
+
     hideAllSlides();
     removeActiveButton();
     
@@ -72,9 +76,12 @@ function moveToPrevSlide() {
     
     slides[slidePosition].classList.add("carousel-item-visible");
     addActiveButton();
+    timerId = setInterval(moveToNextSlide, 5000);
 }
 
 function changeToSlide(clickedButton) {
+    clearInterval(timerId);
+    
     hideAllSlides();
     removeActiveButton();
 
@@ -83,6 +90,7 @@ function changeToSlide(clickedButton) {
     slides[slidePosition].classList.add("carousel-item-visible");
     
     addActiveButton();
+    timerId = setInterval(moveToNextSlide, 5000);
 }
 
 function removeActiveButton() {
